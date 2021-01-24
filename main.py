@@ -4,9 +4,9 @@ from random import choice
 fileName = ""
 dict = None
 
-def playBingo(c):
+def playBingo(c,i):
     #flag = False
-    number = number = input("Ingrese el número de la bola: ")
+    number = number = input("Ingrese el número de la bola " + str(i) + ": ")
     """while(not flag):
         number = input("Ingrese el número de la bola" + " " + str(i) + ": ")
         flag = number.isdigit()
@@ -67,14 +67,14 @@ else:
             print("\nHa elegido el color",color)
             if color=="amarillo" or color=="azul":
                 for i in range(14):
-                    ganadores = playBingo(color)
+                    ganadores = playBingo(color,i+1)
             else:
                 for i in range(11):
-                    ganadores = playBingo(color)
+                    ganadores = playBingo(color,i+1)
 
             if showGanadores(ganadores) is False:
-                if (input("\n¿Desea cantar un número más (s/n)?").lower()) == "s":
-                    ganadores = playBingo(color)
+                if (input("\n¿Desea cantar un número más (s/n)? ").lower()) == "s":
+                    ganadores = playBingo(color,"adicional")
                     showGanadores(ganadores)
             
             ganadores = []
