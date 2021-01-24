@@ -2,22 +2,25 @@ from Carton import Carton
 from random import choice
 
 def createDict(fileName):
-    file = open(fileName, "r")
-    dict = {"amarillo": [], "azul": [], "rojo": []}
+    try:
+        file = open(fileName, "r")
+        dict = {"amarillo": [], "azul": [], "rojo": []}
 
-    for line in file.readlines():
-        cleanLine = line.replace("\n", "")
-        elements = cleanLine.split(",")
+        for line in file.readlines():
+            cleanLine = line.replace("\n", "")
+            elements = cleanLine.split(",")
 
-        numbers = makeArr(elements[2::])
-        mergeSort(numbers)
+            numbers = makeArr(elements[2::])
+            mergeSort(numbers)
 
-        carton = Carton(elements[0], elements[1], numbers)
+            carton = Carton(elements[0], elements[1], numbers)
 
-        dict[carton.color].append(carton)
+            dict[carton.color].append(carton)
 
-    file.close()
-    return dict
+        file.close()
+        return dict
+    except:
+        return None
 
 
 def makeArr(list):
