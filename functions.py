@@ -1,5 +1,5 @@
 from Carton import Carton
-
+from random import choice
 
 def createDict(fileName):
     file = open(fileName, "r")
@@ -92,3 +92,34 @@ def checkNumber(dict, color, number):
             if carton.hits == max:
                 ganadores.append(carton)
     return ganadores
+
+def generateCartones(c,fileName):
+    file = open(fileName,"w")
+    colors = ["amarillo","azul","rojo"]
+    numbers = [i for i in range(1,21)]
+    count = 1
+    max = 0
+    for i in range(c):
+        color = choice(colors)
+        if color == "rojo":
+            max = 11
+        else:
+            max = 14
+
+        line = str(count)+","+color
+        count += 1
+
+        for item in range(max):
+            number = choice(numbers)
+            numbers.remove(number)
+            line += "," + str(number)
+        
+        line += "\n"
+
+        file.write(line)
+
+        numbers.clear()
+        numbers = [i for i in range(1,21)]
+    
+    file.close()
+
