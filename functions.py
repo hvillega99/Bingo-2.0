@@ -96,6 +96,11 @@ def checkNumber(dict, color, number):
                 ganadores.append(carton)
     return ganadores
 
+def restoreHits(dict,color):
+    arr = dict[color]
+    for carton in arr:
+        carton.hits = 0
+
 def generateCartones(c,fileName):
     file = open(fileName,"w")
     colors = ["amarillo","azul","rojo"]
@@ -109,7 +114,11 @@ def generateCartones(c,fileName):
         else:
             max = 14
 
-        line = str(count)+","+color
+        line = ""
+        id = str(count)
+        for i in range(7 - len(id)):
+            line += "0"
+        line += id + "," + color
         count += 1
 
         for item in range(max):
@@ -125,4 +134,3 @@ def generateCartones(c,fileName):
         numbers = [i for i in range(1,21)]
     
     file.close()
-

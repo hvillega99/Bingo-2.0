@@ -3,10 +3,11 @@ from random import choice
 
 fileName = ""
 dict = None
+rounds = [0,0,0]
 
 def playBingo(c,i):
     #flag = False
-    number = number = input("Ingrese el número de la bola " + str(i) + ": ")
+    number = input("Ingrese el número de la bola " + str(i) + ": ")
     """while(not flag):
         number = input("Ingrese el número de la bola" + " " + str(i) + ": ")
         flag = number.isdigit()
@@ -63,7 +64,11 @@ else:
         else:
             print("Entrada no válida")
 
-        if color != "":      
+        if color != "": 
+            rounds[int(option)-1]  += 1
+            if rounds[int(option)-1] > 1:
+                functions.restoreHits(dict,color)
+
             print("\nHa elegido el color",color)
             if color=="amarillo" or color=="azul":
                 for i in range(14):
@@ -75,6 +80,7 @@ else:
             if showGanadores(ganadores) is False:
                 if (input("\n¿Desea cantar un número más (s/n)? ").lower()) == "s":
                     ganadores = playBingo(color,"adicional")
+                   # print(ganadores)
                     showGanadores(ganadores)
             
             ganadores = []
