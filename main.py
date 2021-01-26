@@ -4,19 +4,32 @@ from random import choice
 fileName = ""
 dict = None
 rounds = [0,0,0]
+anfora=list(range(1,21))
 
-def playBingo(c,i):
-    #flag = False
-    number = input("Ingrese el número de la bola " + str(i) + ": ")
-    """while(not flag):
-        number = input("Ingrese el número de la bola" + " " + str(i) + ": ")
-        flag = number.isdigit()
-        if flag:
-            if not (int(number) >= 1 and int(number) <= 20):
-                flag = False
-        if not flag:
-            print("Entrada no válida") """
-    return functions.checkNumber(dict, c, int(number))
+def esNumerico(str):
+    try:
+        int(str)
+        return True
+    except ValueError:
+        return False
+
+def DigitarNum(numStr,i):
+    copia=numStr
+    flag=esNumerico(copia)
+    while(not flag):
+        print('Lo digitado no es un número. Ingresa un valor válido')
+        copia = input(str(i) + ". Ingrese el número de la bola: ")
+        flag=esNumerico(copia)
+    return int(copia)
+
+def playBingo(color,i):
+    number = DigitarNum(input(str(i) + ". Ingrese el número de la bola: "),i)
+    if number not in anfora:
+        print('Bola repetida, o no existe en el anfora. Ingrese número diferente')
+        playBingo(color, i)
+    else:
+        anfora.remove(number)
+        return functions.checkNumber(dict, color, int(number))
 
 def showGanadores(list):
     if len(list) != 0:
@@ -82,6 +95,7 @@ else:
                     ganadores = playBingo(color,"adicional")
                    # print(ganadores)
                     showGanadores(ganadores)
-            
+
+            anfora = list(range(1, 21))
             ganadores = []
             color = ""
